@@ -55,10 +55,32 @@ int myFloodFill(GBufferedImage & image, int x, int y, int newColor, int oldColor
 }
 
 
-void personalCurriculum(Map<string, Vector<string>> & prereqMap,string goal) {
+void personalCurriculum(Map<string, Vector<string> > & prereqMap, string goal) {
   // your code here
+  Set<string> seen;
+  myPersonalCurriculum(prereqMap, goal, seen);
+  cout << goal << endl;
   cout << "[recursion personal curriculum called]" << endl;
 }
+
+
+void myPersonalCurriculum(Map<string, Vector<string> > & prereqMap, string goal, Set<string> & seen) {
+  if (!(prereqMap.containsKey(goal))) {
+    cout << "";
+  } else {
+    Vector<string> current = prereqMap.get(goal);
+    for (string s : current) {
+      myPersonalCurriculum(prereqMap, s, seen);
+    }
+    for (string t : current) {
+      if (!(seen.contains(t))) {
+        seen.add(t);
+        cout << t << endl;
+      }
+    }
+  }
+}
+
 
 string generate(Map<string, Vector<string> > & grammar, string symbol) {
   // your code here
